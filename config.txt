@@ -1,0 +1,35 @@
+global input_delay 50
+global max_windows 16
+global update_interval 10000
+global return_window_name MChat.exe
+//
+>
+WH_AUTO
+--courage
+3000 6000
+MS_CT
+Google
+bot-spam
+<
+>
+WH_MARKOV
+TRUE dictionary\fpr2.txt
+2000 5000
+MS_CT
+Google
+general
+<
+{
++ Mo
+= 7:00 - 7:16
+= 8:41 - 9:32
+= 23:00 - 23:59
++ Tu
+= 22:00 - 23:50
++ We
+= 12:00 - 15:00
++ Th
++ Fr
++ Sa
++ Su
+}
