@@ -2,9 +2,6 @@
 
 #include "MChat_Core\MChat_Base.cpp"
 
-#include <wx\msw\setup.h>
-#include <wx\wx.h>
-
 #include <sstream>
 #include <string>
 
