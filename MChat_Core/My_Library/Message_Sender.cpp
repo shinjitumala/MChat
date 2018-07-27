@@ -210,11 +210,13 @@ protected:
    * string return value: the name of the forground window. Will return a empty string if failed.
    */
   string get_foreground_window_name(){
-    char wnd_title[128];
+    wchar_t wnd_title[128];
     HWND window = GetForegroundWindow();
     int length = GetWindowText(window, wnd_title, sizeof(wnd_title));
     if(length == 0) return "";
-    return wnd_title;
+    wstring ws(wnd_title);
+    string str(ws.begin(), ws.end());
+    return str;
   }
 
   /**
