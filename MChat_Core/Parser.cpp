@@ -66,10 +66,10 @@ private:
   void parse_MH(ifstream& ss, Schedule *current_schedule, list<Message_Handler*>& MH_list, list<Message_Sender*>& MS_list){
     string line;
     if(getline(ss, line)){
-      if(line == "WH_AUTO"){
+      if(line == "MH_AUTO"){
         parse_MH_AUTO(ss, current_schedule, MH_list, MS_list);
         return;
-      }else if(line == "WH_MARKOV"){
+      }else if(line == "MH_MARKOV"){
         parse_MH_MARKOV(ss, current_schedule, MH_list, MS_list);
         return;
       }
@@ -180,7 +180,7 @@ private:
     return;
 
   error:
-    LOG("Main_Parse " << this << " >> parse_MH_AUTO(): Error at line \"" << line << "\" Exiting program...");
+    LOG("Main_Parse " << this << " >> parse_MH_MARKOV(): Error at line \"" << line << "\" Exiting program...");
     exit(1);
   }
 
