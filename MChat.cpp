@@ -9,14 +9,6 @@ extern bool DEBUG;
 
 using namespace std;
 
-/*
-int main () {
-  DEBUG = false;
-  MChat_Base master = MChat_Base();
-  master.start();
-}
-*/
-
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
@@ -30,6 +22,7 @@ enum{
 class MChat_Frame : public wxFrame{
 private:
   wxButton *quit, *stop, *start;
+  MChat_Base m_master;
 public:
   MChat_Frame(const wxString& title) : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600)){
     wxPanel *panel = new wxPanel(this, wxID_ANY);
@@ -59,6 +52,9 @@ public:
     stop->Enable(false);
 
     Centre();
+
+    // initializes the MChat_Base object
+    m_master = MChat_Base();
   }
 
   void OnQuit(wxCommandEvent& WXUNUSED(event)){
@@ -69,12 +65,17 @@ public:
     quit->Enable(true);
     start->Enable(true);
     stop->Enable(false);
+
+    m_master.stop();
   }
 
   void OnStart(wxCommandEvent& WXUNUSED(event)){
+    start->Enable(false);
+
+    m_master.start();
+
     stop->Enable(true);
     quit->Enable(false);
-    start->Enable(false);
   }
 
 };
@@ -82,8 +83,9 @@ public:
 class MChat_App : public wxApp{
 public:
   bool OnInit(){
-    MChat_Frame *btnapp = new MChat_Frame(wxT("MChat_Frame"));
-    btnapp->Show(true);
+    MChat_Frame *mchat = new MChat_Frame(wxT("MChat"));
+    mchat->Show(true);
+    DEBUG = true;
 
     return true;
   }

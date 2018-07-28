@@ -25,6 +25,13 @@ public:
    * Attempts to send queued strings to the target window.
    */
   virtual bool send() = 0;
+
+  /**
+   * Deconstuctor
+   */
+  virtual ~Message_Sender(){
+    LOG("Message_Sender " << this << " >> delete.");
+  };
 };
 
 class MS_Window : public Message_Sender {

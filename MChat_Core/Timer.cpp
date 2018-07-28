@@ -1,6 +1,8 @@
 #ifndef _H_Timer
 #define _H_Timer
 
+#include "My_Library\LOG.hpp"
+
 #include <chrono>
 #include <windows.h>
 
@@ -36,6 +38,7 @@ public:
    */
   void wait_next(){
     Sleep(wait_time);
+    LOG("Timer " << this << " >> waiting " << wait_time << " miliseconds for next update.");
   }
 private:
   /**

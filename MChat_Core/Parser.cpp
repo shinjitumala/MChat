@@ -42,7 +42,6 @@ public:
     string line;
     Schedule *current_schedule = new Schedule();
     while(getline(ss, line)){
-      LOG("hoge");
       if(!(line[0] == '/' && line[1] == '/') && !(line[0] == '\r') && !(line[0] == '\n')){ // skip line if it starts with "//" or is a empty line.
         switch(line[0]){
           case '>':
@@ -130,7 +129,7 @@ private:
   void parse_MH_MARKOV(ifstream& ss, Schedule *current_schedule, list<Message_Handler*>& MH_list, list<Message_Sender*>& MS_list){
     string line, message, path;
     int min, max;
-    Message_Sender* ms;
+    Message_Sender* ms = NULL;
     Message_Handler* mh;
     bool dictionary;
 
@@ -229,7 +228,7 @@ private:
    */
   void parse_schedule(ifstream& ss, Schedule *schedule){
     string line;
-    int current_day_of_week;
+    int current_day_of_week = -1;
     while(getline(ss, line)){
       if(!(line[0] == '/' && line[1] == '/') || line[0] == '\n'){// skips line if it starts with "//" or "\n".
         switch(line[0]){

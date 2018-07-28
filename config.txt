@@ -1,7 +1,7 @@
 global input_delay 80
 global max_windows 16
 global update_interval 1000
-global return_window_name MChat.exe
+global return_window_name MChat
 //
 >
 MH_AUTO
@@ -21,7 +21,7 @@ commands
 <
 >
 MH_MARKOV
-TRUE dictionary\hiff.txt
+TRUE dictionary\fpr2.txt
 5000 300000
 MS_CT
 Google
@@ -57,6 +57,7 @@ general
 = 0:00 - 2:00
 = 3:33 - 4:44
 = 6:00 - 7:00
+= 10:26 - 11:30
 = 19:00 - 21:22
 = 23:00 - 23:59
 + Su

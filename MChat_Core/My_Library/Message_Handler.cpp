@@ -82,6 +82,17 @@ protected:
 
 public:
   /**
+   * Deconstuctor
+   */
+  virtual ~Message_Handler(){
+    if(m_schedule != nullptr){
+      delete m_schedule;
+      m_schedule = nullptr;
+    }
+    LOG("Message_Handler " << this << " >> delete.");
+  };
+
+  /**
    * Takes tm of the current time. Will queue messages to its Message_Sender
    * if necessary.
    * tm *time: tm of the current time.
@@ -146,6 +157,13 @@ public:
   }
 
   /**
+   * Deconstuctor
+   */
+  ~Word_Handler(){
+    LOG("Word_Handler " << this << " >> delete.");
+  };
+
+  /**
    * Takes tm of the current time. Will queue messages to its Message_Sender
    * if necessary.
    * tm *time: tm of the current time.
@@ -188,6 +206,14 @@ public:
     set_next_counter();
     LOG("Markov_Generator " << this << " >> new. Schedule: " << schedule << ", Message_Sender: " << ms);
   }
+
+  /**
+   * Deconstuctor
+   */
+  ~Markov_Generator(){
+    LOG("Markov_Generator " << this << " >> delete.");
+    delete language;
+  };
 
   /**
    * Takes tm of the current time. Will queue messages to its Message_Sender

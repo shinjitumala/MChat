@@ -2,6 +2,6 @@
 #define _H_LOG
 
 bool DEBUG = false;
-#define LOG(x) if(DEBUG) {cerr << x << endl;};
+#define LOG(x) if(DEBUG) {cerr << x << endl << flush;};
 
 #endif
