@@ -91,3 +91,4 @@ general
 //= 6:37 - 8:00
 //= 16:30 - 19:00
 //}
+// mingw32-make -f makefile.gcc CFG=32 CPPFLAGS="-DHAVE_TR1_TYPE_TRAITS" CXXFLAGS="-Wno-deprecated-declarations -Wno-unused-local-typedefs -fno-keep-inline-dllexport" MONOLITHIC=1 SHARED=1 UNICODE=1 BUILD=release

@@ -5,6 +5,7 @@
 
 #include <list>
 #include <windows.h>
+#include <pthread.h>
 
 extern int UPDATE_INTERVAL;
 
@@ -12,21 +13,37 @@ class MChat_Base {
 private:
   list<Message_Handler*> m_MH_list;
   list<Message_Sender*> m_MS_list;
-  bool run;
+  volatile bool m_run;
+  pthread_t m_thread;
 
 public:
   MChat_Base(){
-    run = true;
+    m_run = true;
   }
 
   void start(){
-    LOG("MChat_Base " << this << " >> start(): Operation started.");
+    LOG("MChat_Base " << this << " >> start(): Attempting to start Operation...");
+    bool status = (pthread_create(&m_thread, NULL, run_helper, this) == 0);
+    if(status){
+      LOG("MChat_Base " << this << " >> start(): Operation start success.");
+    }else{
+      LOG("MChat_Base " << this << " >> start(): Operation start failed. Exiting program...");
+      exit(1);
+    }
+  }
+
+  void stop(){
+    (void) pthread_join(m_thread, NULL);
+  }
+
+private:
+  void run(){
     ifstream ss("config.txt");
     Main_Parser main = Main_Parser();
     main.parse(ss, m_MH_list, m_MS_list);
 
     Timer timer_clock = Timer(UPDATE_INTERVAL);
-    while(run){
+    while(m_run){
       for(auto itr = m_MH_list.begin(); itr != m_MH_list.end(); itr++){
         (**itr).update(timer_clock.get_tm());
       }
@@ -35,6 +52,10 @@ public:
       }
       timer_clock.wait_next();
     }
-    LOG("MChat_Base " << this << " >> start(): Operation stopped.");
+  }
+
+  static void* run_helper(void* This){
+    ((MChat_Base*)This)->run();
+    return NULL;
   }
 };

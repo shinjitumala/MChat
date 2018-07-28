@@ -38,9 +38,11 @@ public:
    * list<Message_Sender*>& MS_list: List of Message_Sender objects to be built.
    */
   void parse(ifstream& ss, list<Message_Handler*>& MH_list, list<Message_Sender*>& MS_list){
+    // LOG("Main_Parser " << this << " >> parse(): Begin parsing.");
     string line;
     Schedule *current_schedule = new Schedule();
     while(getline(ss, line)){
+      LOG("hoge");
       if(!(line[0] == '/' && line[1] == '/') && !(line[0] == '\r') && !(line[0] == '\n')){ // skip line if it starts with "//" or is a empty line.
         switch(line[0]){
           case '>':
